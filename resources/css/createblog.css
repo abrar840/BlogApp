@@ -1,0 +1,80 @@
+.container{
+    display: flex;
+    /* border: 1px solid black; */
+    /* background-color: #dd9696; */
+      justify-content:flex-start;
+    align-items:flex-start;
+    gap: 20px;
+    
+}
+.main {
+  margin-top: 80px; /* or however tall your navbar is */
+}
+ 
+ 
+.input_card{
+    display:flex;
+    flex-direction: column;
+    border: 2px solid rgb(47, 18, 102);
+    width:60vw;
+    margin-left: 50px;
+    margin-top: 50px;
+  border-radius: 20px;
+  padding: 20px;
+  height: 600px;;
+}
+
+.title_wrapper input{
+    border: none;
+    width:500px;
+
+
+}
+
+ 
+.blog_wrapper textarea {
+  width: 100%;
+  min-height: 300px;
+  border: none;
+  
+  padding: 12px;
+  line-height: 1.6;
+}
+
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.popup {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+
+@media (min-width: 1536px) {
+    .container {
+        max-width: 1600px;
+    }
+}

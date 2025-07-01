@@ -23,6 +23,7 @@ Route::get('/', function () {
 
  Route::get('/createblog', [PostController::class, 'index'])->name('create-post');
 
+ Route::get('/listing', [PostController::class, 'home'])->name('view-blogs');
 
 
 

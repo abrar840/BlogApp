@@ -20,4 +20,9 @@ class PostController extends Controller
         
         return Inertia::render('Blog/CreateBlog');
     }
+
+     public function home(){
+        
+        return Inertia::render('Blog/Listing');
+    }
 }

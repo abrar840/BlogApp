@@ -1,26 +1,30 @@
 import React from 'react'
-
+import '@/../css/navbar.css';
 
 import logo from './logo.svg';
 import SearchBar from './SearchBar';
 
-const Navbar = () => {
+const Navbar = (props) => {
     return (
         <div className=''>
             <div className="header">
                 <div className="logo"><img src={logo} alt="logo" className='h-12 w-12' />
                     <h1><b><i>mini BLOG</i></b></h1></div>
                 {/* {route.current('home') && <SearchBar />} */}
-                <SearchBar />
+                <div style={{ width: "250px" }} className='p-0'>
+                    {props.searchbar ? <SearchBar /> : null}
+                </div>
+
                 <nav className='navbar'>
                     <ul>
-                        <li className='text-center cursor-pointer select-none'>Home</li>
-                        <li className='text-center cursor-pointer select-none'>Create blog</li>
+                        <li className='text-center cursor-pointer select-none'><a href="/home">Home</a>
+                        </li>
+                        <li className='text-center cursor-pointer select-none'><a href="/createblog">Create</a></li>
                     </ul>
                 </nav>
-                      <div className="btn">
+                <div className="btn">
                     <button className='text-center cursor-pointer select-none'><i>login</i></button>
-                      </div>
+                </div>
             </div>
         </div>
     )
