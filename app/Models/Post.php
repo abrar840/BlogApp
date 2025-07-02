@@ -1,24 +1,37 @@
 <?php
 
 namespace App\Models;
-use App\Models\Images;
+use App\Models\Image;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
     //
 
+    use HasFactory;
+
+
+    protected $fillable = [
+
+        'title',
+        'content',
+    ];
 
 
 
 
 
 
-
-    public function images(){
-        $this->hasMany(Images::class,'post_id');
+    public function images()
+    {
+        return $this->hasMany(Image::class, 'post_id');
     }
 
-    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
 }

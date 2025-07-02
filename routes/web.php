@@ -21,11 +21,11 @@ Route::get('/', function () {
 
 
 
- Route::get('/createblog', [PostController::class, 'index'])->name('create-post');
+Route::get('/createblog', [PostController::class, 'index'])->name('create-post');
 
- Route::get('/listing', [PostController::class, 'home'])->name('view-blogs');
+Route::get('/listing', [PostController::class, 'home'])->name('view-blogs');
 
-
+Route::Post('/publish', [PostController::class, 'create'])->name('publish-blogs');
 
 
 
@@ -40,4 +40,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

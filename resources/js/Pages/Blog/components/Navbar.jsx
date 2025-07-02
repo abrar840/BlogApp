@@ -17,7 +17,7 @@ const Navbar = (props) => {
 
                 <nav className='navbar'>
                     <ul>
-                        <li className='text-center cursor-pointer select-none'><a href="/home">Home</a>
+                        <li className='text-center cursor-pointer select-none'><a href="/listing">Home</a>
                         </li>
                         <li className='text-center cursor-pointer select-none'><a href="/createblog">Create</a></li>
                     </ul>

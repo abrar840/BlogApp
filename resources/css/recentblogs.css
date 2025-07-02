@@ -1,9 +1,9 @@
 * {
-    font-family: 'Lora', serif;
+    font-family: sans-serif;
 }
 
 .main {
-     
+
     margin-left: 200px;
     display: flex;
     flex-direction: column;
@@ -20,7 +20,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     width: 80vw;
-    margin-top:10px;
+    margin-top: 10px;
     border-radius: 20px;
     padding: 20px;
     gap: 50px;
@@ -63,4 +63,9 @@
 
 .edit_btn {
     background-color: #629962;
+}
+
+
+.text_wrapper p {
+    width: 10px;
 }
