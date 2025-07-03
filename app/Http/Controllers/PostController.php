@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Exception;
+use GrahamCampbell\ResultType\Error;
+use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
+use Illuminate\Validation\UnauthorizedException;
 use Inertia\Inertia;
 use App\Models\Post;
 use App\Models\Image;
@@ -12,7 +15,7 @@ class PostController extends Controller
 {
     //
     public function create(Request $request)
-    {
+    {   $path="";
         $user = auth()->user();
 
         // dd("hi its create function testing");
@@ -20,42 +23,65 @@ class PostController extends Controller
             'title' => 'required|max:100|min:3',
             'content' => 'required|max:1000|min:20'
         ]);
-        $path = $request->file('img')->store('uploads', 'public');
 
+
+        if ($request->hasFile('img')) {
+            $path = $request->file('img')->store('uploads', 'public');
+          
+        }
+
+        $blogData = [
+            'user_id' => $user->id,
+            'title' => $request->title,
+            'content' => $request->content,
+
+        ];
+
+        $imageData = [
+
+            'path' => $path,
+        ];
         try {
-            $post = new Post();
-            $post->user_id = $user->id;
-            $post->title = $request->title;
-            $post->content = $request->content;
-            $post->save();
+               if(!$request->editingId){
+            $post = $user->posts()->create($blogData);
+            $post->images()->create($imageData);
+            return back()->with('success', 'Blog posted successfully');}
+            else{
+               
+           $post=Post::findOrFail($request->editingId);
+           $post->update($blogData);
+           if($path){
+            $post->images()->update($imageData);
+           }
 
-            $image = new Image();
-            $image->post_id = $post->id;
-            $image->path = $path;
-            $image->save();
 
-            return back()->with('success', 'Blog posted successfully');
+            }
+
         } catch (Exception $e) {
             return back()->with('error', 'Failed to save the post. Please try again.');
         }
     }
 
 
-
-
-
-
-
-
-
-
-    public function deletePost()
+    public function destroy($id)
     {
+        $blog = Post::findOrFail($id);
+        if ($blog->user->id !== auth()->user()->id) {
+            abort(403, 'Unauthorized');
+        }
+        $blog->delete();
+        return redirect()->back()->with('Success', 'Deleted succesfully');
+
     }
 
-    public function edit($id)
-    {
-    }
+    // public function edit($id)
+    // {  $blog = Post::where("id",$id)->with('images')->get();
+    //     //  if ($blog->user->id !== auth()->user()->id) {
+    //     //     abort(403, 'Unauthorized');
+    //     // }  
+    //     return redirect()->back()->with("editblog",$blog);
+
+    // }
 
     public function search()
     {
@@ -70,7 +96,8 @@ class PostController extends Controller
 
     public function home()
     {
-
-        return Inertia::render('Blog/Listing');
+           $blogs = Post::with('images')->get();
+          
+        return Inertia::render('Blog/Listing',['blogs'=>$blogs]);
     }
 }

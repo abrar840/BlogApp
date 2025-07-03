@@ -1,63 +1,51 @@
 import '@/../css/home.css';
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from './components/Navbar';
-
+import { usePage } from '@inertiajs/react';
 
 const Home = () => {
+    const { blogs } = usePage().props;
+
+    const [filteredBlogs, setFilteredBlogs] = useState(blogs);
+
+    function searchFilter(search) {
+        if (!search) {
+            setFilteredBlogs(blogs);
+            return;
+        }
+        const keyword = search.toLowerCase();
+        const filtered = blogs.filter(blog =>
+            blog.title.toLowerCase().includes(keyword)
+        );
+        setFilteredBlogs(filtered);
+    }
     return (
         <div className='body'>
-          <Navbar searchbar={1}/>
-
+            <Navbar searchbar={1} search={searchFilter} />
             <div className="main">
-
                 <div className="container">
                     <div className="logo-wrapper">
                         <h1 className='logo-txt'>Latest</h1>
                     </div>
-
-
-                    <div className="card">
-
-                        <img src="/images/img1.jpg" alt="Blog image" className="w-[880px] h-[400px] rounded-lg" />
-
-                        <div className="txt">
-                            <div className="title">
-                                <h1>Cheerful Loving Couple Bakers Drinking Coffee</h1>
-                            </div>
-                            <div className="blog_info">
-                                <p>It’s no secret that the digital industry is booming. From exciting startups to global brands, companies are reaching out to digital agencies, responding to the new possibilities available. However, the industry is fast becoming overcrowded, heaving with agencies offering similar services — on the surface, at least.
-
-                                    Producing creative, fresh projects is the key to standing out. Unique side projects are the best place to innovate, but balancing commercially and creatively lucrative work is tricky. So, this article looks at how to make side projects work and why they’re worthwhile, drawing on lessons learned from our development of the ux ompanion app</p>
-                            </div>
-                            <div className="blog_btn">
-                                <button>Read more...</button>
-                            </div>
-                        </div>
-                        <hr />
-                       
-                    </div>
-
-                    <div className="card">
-
-                        <img src="/images/img1.jpg" alt="Blog image" className="w-[880px] h-[400px] rounded-lg" />
-
-                        <div className="txt">
-                            <div className="title">
-                                <h1>Cheerful Loving Couple Bakers Drinking Coffee</h1>
-                            </div>
-                            <div className="blog_info">
-                                <p>It’s no secret that the digital industry is booming. From exciting startups to global brands, companies are reaching out to digital agencies, responding to the new possibilities available. However, the industry is fast becoming overcrowded, heaving with agencies offering similar services — on the surface, at least.
-
-                                    Producing creative, fresh projects is the key to standing out. Unique side projects are the best place to innovate, but balancing commercially and creatively lucrative work is tricky. So, this article looks at how to make side projects work and why they’re worthwhile, drawing on lessons learned from our development of the ux ompanion app</p>
-                            </div>
-                        </div>
-                         <div className="blog_btn">
-                                <button>Read more...</button>
-                            </div>
-                    </div>
-
+                    {filteredBlogs?.map((blog, index) => {
+                        return (
+                            <div className="card" key={index}>
+                                <img src={"/storage/" + blog.images[0].path} alt="Blog image" className="w-[880px] h-[400px] rounded-lg" />
+                                <div className="txt">
+                                    <div className="title">
+                                        <h1>{blog.title}</h1>
+                                    </div>
+                                    <div className="blog_info">
+                                        <p>{blog.content}</p>
+                                    </div>
+                                    <div className="blog_btn">
+                                        <button>Read more...</button>
+                                    </div>
+                                </div>
+                                <hr />
+                            </div>)
+                    })}
                 </div>
-
             </div>
         </div>
     )

@@ -12,18 +12,17 @@ const Navbar = (props) => {
                     <h1><b><i>mini BLOG</i></b></h1></div>
                 {/* {route.current('home') && <SearchBar />} */}
                 <div style={{ width: "250px" }} className='p-0'>
-                    {props.searchbar ? <SearchBar /> : null}
+                    {props.searchbar ? <SearchBar search={props.search} /> : null}
                 </div>
-
                 <nav className='navbar'>
                     <ul>
-                        <li className='text-center cursor-pointer select-none'><a href="/listing">Home</a>
+                        <li className='text-center cursor-pointer select-none'><a href="/">Home</a>
                         </li>
                         <li className='text-center cursor-pointer select-none'><a href="/createblog">Create</a></li>
                     </ul>
                 </nav>
                 <div className="btn">
-                    <button className='text-center cursor-pointer select-none'><i>login</i></button>
+                    {/* <button className='text-center cursor-pointer select-none'><i>login</i></button> */}
                 </div>
             </div>
         </div>

@@ -40,8 +40,11 @@
     border-radius: 1px;
     padding: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-
+        height: 395px;
+ 
 }
+
+
 
 .btn_wrapper {
     display: flex;
@@ -61,6 +64,9 @@
     color: white;
 }
 
+.delete_btn:hover{
+    background-color: #8f0f0f;
+}
 .edit_btn {
     background-color: #629962;
 }
@@ -68,4 +74,6 @@
 
 .text_wrapper p {
     width: 10px;
+      height: 395px;
+     
 }
