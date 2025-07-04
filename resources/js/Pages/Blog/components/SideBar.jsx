@@ -7,7 +7,8 @@ const SideBar = ({ onTrigger }) => {
       <div className="title"></div>
       <div className="list">
         <ul>
-          <li >Your Recent blogs</li>
+          <li > Your Recent Blogs
+          </li>
           <li onClick={onTrigger}>Create New Blog</li>
           <li>
 

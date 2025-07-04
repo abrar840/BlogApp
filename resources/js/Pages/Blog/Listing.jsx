@@ -30,7 +30,9 @@ const Home = () => {
                     {filteredBlogs?.map((blog, index) => {
                         return (
                             <div className="card" key={index}>
-                                <img src={"/storage/" + blog.images[0].path} alt="Blog image" className="w-[880px] h-[400px] rounded-lg" />
+
+                                {blog.images[0].path && <img src={"/storage/" + blog.images[0].path} alt="Blog image" className="w-[880px] h-[400px] rounded-lg" />}
+                            
                                 <div className="txt">
                                     <div className="title">
                                         <h1>{blog.title}</h1>

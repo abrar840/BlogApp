@@ -22,7 +22,7 @@ use Inertia\Inertia;
 
 Route::get('/', [PostController::class, 'home'])->name('view-blogs');
 
-Route::get('/createblog', [PostController::class, 'index'])->middleware(['auth'])->name('create-post');
+Route::get('/createblog', [PostController::class, 'index'])->middleware(['auth'])->name('create-blog');
 
 Route::get('/miniblog/home', [PostController::class, 'home'])->name('home');
 

@@ -96,7 +96,8 @@ class PostController extends Controller
 
     public function home()
     {
-           $blogs = Post::with('images')->get();
+          $blogs = Post::with('images')->inRandomOrder()->get();
+
           
         return Inertia::render('Blog/Listing',['blogs'=>$blogs]);
     }
