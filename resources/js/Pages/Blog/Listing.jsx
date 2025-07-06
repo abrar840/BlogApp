@@ -2,7 +2,13 @@ import '@/../css/home.css';
 import React, { useState } from 'react'
 import Navbar from './components/Navbar';
 import { usePage } from '@inertiajs/react';
-
+import {
+    Card, CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card"
 const Home = () => {
     const { blogs } = usePage().props;
 
@@ -29,10 +35,9 @@ const Home = () => {
                     </div>
                     {filteredBlogs?.map((blog, index) => {
                         return (
-                            <div className="card" key={index}>
-
+                            <Card key={index} className='w-[800px]'>
+                                <CardContent className='p-[20px]'>
                                 {blog.images[0].path && <img src={"/storage/" + blog.images[0].path} alt="Blog image" className="w-[880px] h-[400px] rounded-lg" />}
-                            
                                 <div className="txt">
                                     <div className="title">
                                         <h1>{blog.title}</h1>
@@ -45,7 +50,8 @@ const Home = () => {
                                     </div>
                                 </div>
                                 <hr />
-                            </div>)
+                                  </CardContent>
+                            </Card>)
                     })}
                 </div>
             </div>

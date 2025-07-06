@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from '@inertiajs/react';
 import '@/../css/navbar.css';
 
 import logo from './logo.svg';
@@ -16,16 +17,21 @@ const Navbar = (props) => {
                 </div>
                 <nav className='navbar'>
                     <ul>
-                        <li className='text-center cursor-pointer select-none'><a href="/">Home</a>
-                        </li>
-                        <li className='text-center cursor-pointer select-none'><a href="/createblog">Create</a></li>
-                    </ul>
-                </nav>
-                <div className="btn">
-                    {/* <button className='text-center cursor-pointer select-none'><i>login</i></button> */}
-                </div>
+
+                    <li className='text-center cursor-pointer select-none'>
+                        <Link href="/">Home</Link>
+                    </li>
+                    <li className='text-center cursor-pointer select-none'>
+                        <Link href="/createblog">Create</Link>
+                    </li>
+                    
+                </ul>
+            </nav>
+            <div className="btn">
+                {/* <button className='text-center cursor-pointer select-none'><i>login</i></button> */}
             </div>
         </div>
+        </div >
     )
 }
 

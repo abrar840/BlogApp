@@ -15,7 +15,8 @@ class PostController extends Controller
 {
     //
     public function create(Request $request)
-    {   $path="";
+    {
+        $path = "";
         $user = auth()->user();
 
         // dd("hi its create function testing");
@@ -27,7 +28,7 @@ class PostController extends Controller
 
         if ($request->hasFile('img')) {
             $path = $request->file('img')->store('uploads', 'public');
-          
+
         }
 
         $blogData = [
@@ -42,17 +43,17 @@ class PostController extends Controller
             'path' => $path,
         ];
         try {
-               if(!$request->editingId){
-            $post = $user->posts()->create($blogData);
-            $post->images()->create($imageData);
-            return back()->with('success', 'Blog posted successfully');}
-            else{
-               
-           $post=Post::findOrFail($request->editingId);
-           $post->update($blogData);
-           if($path){
-            $post->images()->update($imageData);
-           }
+            if (!$request->editingId) {
+                $post = $user->posts()->create($blogData);
+                $post->images()->create($imageData);
+                return back()->with('success', 'Blog posted successfully');
+            } else {
+
+                $post = Post::findOrFail($request->editingId);
+                $post->update($blogData);
+                if ($path) {
+                    $post->images()->update($imageData);
+                }
 
 
             }
@@ -71,6 +72,7 @@ class PostController extends Controller
         }
         $blog->delete();
         return redirect()->back()->with('Success', 'Deleted succesfully');
+
 
     }
 
@@ -96,9 +98,9 @@ class PostController extends Controller
 
     public function home()
     {
-          $blogs = Post::with('images')->inRandomOrder()->get();
+        $blogs = Post::with('images')->inRandomOrder()->get();
 
-          
-        return Inertia::render('Blog/Listing',['blogs'=>$blogs]);
+
+        return Inertia::render('Blog/Listing', ['blogs' => $blogs]);
     }
 }

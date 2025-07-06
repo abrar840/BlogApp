@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { useForm, usePage, router } from '@inertiajs/react';
+import { Textarea } from "@/components/ui/textarea"
+import { Button } from "@/components/ui/button"    
 const NewBlog = ({ onClose, blogdata, id }) => {
   // const [img,setImg] = useState();
   const { errors } = usePage().props;
@@ -40,7 +42,8 @@ const NewBlog = ({ onClose, blogdata, id }) => {
       <form onSubmit={handleSubmit}>
         <div className="input_card popup">
           <button className="close-btn" type="button" onClick={handleClose}>×</button>
-          <div className="submit-btn" ><button action="submit">Publish</button></div>
+          <div className="" > <Button action='submit'>Publish</Button></div>
+
           <div className="image_wrapper p-8">
             <label htmlFor="fileInput" style={{
               display: "inline-block",
@@ -63,7 +66,7 @@ const NewBlog = ({ onClose, blogdata, id }) => {
 
           <div className="blog_wrapper p-8">
             {errors.text && <div className='bg-red-600'>{errors.content}</div>}
-            <textarea name="" id="" placeholder='enter deatails here ' maxLength={1000} onChange={(e) => { setData('content', e.target.value) }} value={data.content} required />
+            <Textarea  placeholder='enter deatails here ' maxLength={1000} onChange={(e) => { setData('content', e.target.value) }} value={data.content} required/>
           </div>
         </div>
       </form>

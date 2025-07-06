@@ -1,6 +1,16 @@
 import React, { useState } from 'react'
 import '@/../css/recentblogs.css';
 import { router } from '@inertiajs/react';
+import {
+    Card,
+
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
 const RecentBlogs = ({ blogs, onEdit }) => {
 
 
@@ -18,24 +28,28 @@ const RecentBlogs = ({ blogs, onEdit }) => {
                 {blogs &&
                     blogs.map((blog, index) => {
                         return (
-                            <div className="blogs_card" key={index}>
-                                <div className="img_wrapper">
-                                    {blog.images.map((image) => {
-                                        return (
-                                            <img src={"/storage/" + image.path} alt="Blog image" className="w-[300px] h-[250px] rounded-lg" />)
-                                    })}
-                                </div>
-                                <div className="title_wrapper"><b>{blog.title}</b></div>
-                                <div className=" max-w-[300px]">
-                                    <p className="">
-                                        {blog.content.split(" ").slice(0, 12).join(" ") + "...."}
-                                    </p>
-                                </div>
-                                <div className="btn_wrapper">
-                                    <div className="edit_btn"> <button onClick={() => { onEdit(blog.id) }}> Edit </button></div>
-                                    <div className="delete_btn"><button onClick={() => { onDelete(blog.id) }}>Delete</button></div>
-                                </div>
-                            </div>)
+                            <Card key={index}>
+                                <CardContent className='p-5'>
+                                    <div className="img_wrapper">
+                                        {blog.images.map((image) => {
+                                            return (
+                                                <img src={"/storage/" + image.path} alt="Blog image" className="w-[300px] h-[250px] rounded-lg" />)
+                                        })}
+                                    </div>
+                                    <div className="title_wrapper"><b>{blog.title}</b></div>
+                                    <div className=" max-w-[300px]">
+                                        <p className="">
+                                            {blog.content.split(" ").slice(0, 12).join(" ") + "...."}
+                                        </p>
+                                    </div>
+                                    <div className="btn_wrapper">
+
+                                        <div className=""> <Button className='bg-green-500' onClick={() => { onEdit(blog.id) }}>Edit-Blog</Button></div>
+                                        <div className=""> <Button variant="destructive" onClick={() => { onDelete(blog.id) }}>Delete</Button></div>
+
+                                    </div>
+                                </CardContent>
+                            </Card>)
                     })}
             </div>
         </div>

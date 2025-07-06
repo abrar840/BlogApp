@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Navbar from './components/navbar'
+import Navbar from './components/Navbar'
 // import {useform} from '@inertia/react'
 import '@/../css/createblog.css';
 import SideBar from './components/SideBar';
