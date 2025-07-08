@@ -1,77 +1,103 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { useForm, usePage, router } from '@inertiajs/react';
-import { Textarea } from "@/components/ui/textarea"
-import { Button } from "@/components/ui/button"    
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+
 const NewBlog = ({ onClose, blogdata, id }) => {
-  // const [img,setImg] = useState();
   const { errors } = usePage().props;
 
-  function imageview() {
-    if (blogdata) {
-      const image = `/storage/${blogdata.images[0].path}`;
-      return (image);
-    } else { return "" }
-  }
+  const imageview = () => {
+    return blogdata ? `/storage/${blogdata.images[0].path}` : "";
+  };
 
-
-  const { data, setData, post, processing, error, reset } = useForm({
-    editingId: id ? id : "",
+  const { data, setData, post, processing, reset } = useForm({
+    editingId: id || "",
     img: "",
     title: blogdata ? blogdata.title : "",
     content: blogdata ? blogdata.content : "",
     url: imageview(),
-  })
+  });
 
-  function imgUpload(e) {
-    setData('img', e.target.files[0]);
-    setData('url', URL.createObjectURL(e.target.files[0]))
+  const imgUpload = (e) => {
+    const file = e.target.files[0];
+    setData("img", file);
+    setData("url", URL.createObjectURL(file));
+  };
 
-  }
-  function handleSubmit(e) {
-    e.preventDefault()
-    router.post('publish', data, { onSuccess: onClose })
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    router.post("Blog", data, { onSuccess: onClose });
+  };
 
-  function handleClose() {
+  const handleClose = () => {
     reset();
     onClose();
   };
 
   return (
-    <div className='overlay'>
+    <div className="overlay">
       <form onSubmit={handleSubmit}>
-        <div className="input_card popup">
-          <button className="close-btn" type="button" onClick={handleClose}>×</button>
-          <div className="" > <Button action='submit'>Publish</Button></div>
+        <Card className="input_card popup">
+          <CardHeader>
+            <div className="flex items-center justify-between">
 
-          <div className="image_wrapper p-8">
-            <label htmlFor="fileInput" style={{
-              display: "inline-block",
-              padding: "10px 20px",
-              backgroundColor: "#007bff",
-              color: "white",
-              borderRadius: "5px",
-              cursor: "pointer"
-            }}>
-              {data.url ? "Change Image" : "Add Image (Optional)"}
-            </label>
-            <input type="file" accept="image/*" onChange={imgUpload} placeholder='add image' style={{ display: "none" }} id="fileInput" /></div>
-          <div className="preview">   {data.url && <img src={data.url} alt="uploded image" className='preview-img' />}</div>
+              <CardTitle>{data.editingId ?"Edit Mode":"Create a New Blog"}</CardTitle>
+              <button className="close-btn ml-4" type="button" onClick={handleClose}>×</button>
+            </div>
+          </CardHeader>
 
-          <div className="title_wrapper p-8 ">
+          <CardContent>
+            <div className="image_wrapper p-8">
+              <Label htmlFor="fileInput" className="cursor-pointer bg-blue-500 text-white rounded-md px-4 py-2">
+                {data.url ? "Change Image" : "Add Image (Optional)"}
+              </Label>
+              <input type="file" accept="image/*" id="fileInput" onChange={imgUpload} style={{ display: "none" }} />
+            </div>
 
-            <input type="text" maxLength={100} placeholder='Enter Title here.. ' onChange={(e) => { setData('title', e.target.value) }} value={data.title} required />
-            <hr />
-            {errors.title && <div className='bg-red-600'>{errors.title}</div>}</div>
+            <div className="preview">
+              {data.url && <img src={data.url} alt="uploaded" className="preview-img" />}
+            </div>
 
-          <div className="blog_wrapper p-8">
-            {errors.text && <div className='bg-red-600'>{errors.content}</div>}
-            <Textarea  placeholder='enter deatails here ' maxLength={1000} onChange={(e) => { setData('content', e.target.value) }} value={data.content} required/>
-          </div>
-        </div>
+            <div className="title_wrapper p-8">
+              <Input
+                className="w-full"
+                type="text"
+                maxLength={100}
+                placeholder="Enter Title here..."
+                value={data.title}
+                onChange={(e) => setData("title", e.target.value)}
+                required
+              />
+              {errors.title && <div className="bg-red-600 text-white mt-1 p-1 rounded">{errors.title}</div>}
+            </div>
+
+            <div className="blog_wrapper p-8">
+              <Textarea
+                placeholder="Enter details here..."
+                maxLength={1000}
+                value={data.content}
+                onChange={(e) => setData("content", e.target.value)}
+                required
+              />
+              {errors.content && <div className="bg-red-600 text-white mt-1 p-1 rounded">{errors.content}</div>}
+            </div>
+          </CardContent>
+
+          <CardFooter className="flex justify-end gap-2">
+            <Button type="submit" disabled={processing}>
+              {id ? "Update Blog" : "Publish"}
+            </Button>
+            <Button type="button" variant="outline" onClick={handleClose}>
+              Cancel
+            </Button>
+          </CardFooter>
+        </Card>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default NewBlog
+export default NewBlog;

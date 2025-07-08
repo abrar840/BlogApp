@@ -2,9 +2,9 @@
     font-family: sans-serif;
 }
 
-.main {
-
-    margin-left: 200px;
+.main-blog {
+    margin-top:122px;
+    margin-left:120px;
     display: flex;
     flex-direction: column;
     overflow-x: hidden;

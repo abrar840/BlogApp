@@ -24,23 +24,20 @@
 }
 
 
-
-.input_card {
+.main-layout {
   display: flex;
-  flex-direction: column;
-  border: 2px solid rgb(47, 18, 102);
-  width: 60vw;
-  margin-left: 50px;
-  margin-top: 50px;
-  border-radius: 20px;
-  padding: 20px;
-  height: 600px;
-  ;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
+
+ 
+
+
+
 
 .title_wrapper input {
   border: none;
-  width: 500px;
+  width: 100%;
   font-weight: 600;
   font-size: x-large;
 
@@ -49,10 +46,9 @@
 
 
 .blog_wrapper textarea {
-  width: 100%;
-  min-height: 300px;
+ 
+ height:200px;
   border: none;
-
   padding: 12px;
   line-height: 1.6;
 }
@@ -71,16 +67,28 @@
   z-index: 999;
 }
 
+
+.input_card {
+  display: flex;
+  flex-direction: column;
+   
+   overflow-y:scroll;
+  margin-left: 50px;
+  margin-top: 50px;
+  border-radius: 20px;
+  padding: 20px;
+  height:90vh;
+}
 .popup {
   background: white;
   padding: 30px;
   border-radius: 10px;
   position: relative;
-  overflow-y: scroll;
+  
 }
 
 .close-btn {
-  position: fixed;
+  position:relative;
   margin-left: 55vw;
   background: transparent;
   border: none;

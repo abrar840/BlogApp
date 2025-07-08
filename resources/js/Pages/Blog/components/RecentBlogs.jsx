@@ -16,11 +16,11 @@ const RecentBlogs = ({ blogs, onEdit }) => {
 
     function onDelete(id) {
         if (confirm("are sure you want to delete this blog")) {
-            router.delete(`/delete/${id}`)
+            router.delete(`/Blog/${id}`)
         }
     }
     return (
-        <div className="main">
+        <div className="main-blog">
             <div className="title">
                 <h1>Your Recent blogs</h1>
             </div>

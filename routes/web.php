@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\BlogPostController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -18,19 +20,14 @@ use Inertia\Inertia;
 
 
 
+Route::resource('Blog',BlogPostController::class)->middleware(['auth']);
 
+Route::get('/', [HomeController::class, 'home'])->name('view-blogs');
 
-Route::get('/', [PostController::class, 'home'])->name('view-blogs');
-
-Route::get('/createblog', [PostController::class, 'index'])->middleware(['auth'])->name('create-blog');
-
-Route::get('/miniblog/home', [PostController::class, 'home'])->name('home');
-
-Route::Post('/publish', [PostController::class, 'create'])->name('publish-blogs');
-
-
-Route::Delete('/delete/{id}', [PostController::class, 'destroy'])->name('delete-blog');
-Route::Put('/edit/{id}', [PostController::class, 'edit'])->name('edit-blog');
+// Route::get('/createblog', [PostController::class, 'index'])->middleware(['auth'])->name('create-blog');
+// Route::Post('/publish', [PostController::class, 'create'])->name('publish-blogs');
+// Route::Delete('/delete/{id}', [PostController::class, 'destroy'])->name('delete-blog');
+// Route::Put('/edit/{id}', [PostController::class, 'edit'])->name('edit-blog');
 
 
 

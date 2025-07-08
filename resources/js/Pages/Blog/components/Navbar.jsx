@@ -22,7 +22,7 @@ const Navbar = (props) => {
                         <Link href="/">Home</Link>
                     </li>
                     <li className='text-center cursor-pointer select-none'>
-                        <Link href="/createblog">Create</Link>
+                        <Link href="/Blog">Create</Link>
                     </li>
                     
                 </ul>
